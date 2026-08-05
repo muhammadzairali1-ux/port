@@ -141,25 +141,29 @@
   h2.section-title{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:clamp(26px,3.4vw,40px);margin:8px 0 0;letter-spacing:-0.02em;}
 
   /* ---------- work grid ---------- */
-  .work-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;}
+  .work-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
   .card{
     background:linear-gradient(180deg, var(--panel), var(--panel-2));
-    border:1px solid var(--line);border-radius:14px;padding:26px 26px 20px;
+    border:1px solid var(--line);border-radius:14px;padding:0;
     display:flex;flex-direction:column;text-decoration:none;color:var(--text);
     position:relative;overflow:hidden;transition:transform .18s, border-color .18s, box-shadow .18s;
   }
-  .card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--cyan);opacity:0;transition:opacity .18s;}
+  .card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--cyan);opacity:0;transition:opacity .18s;z-index:2;}
   .card:hover{transform:translateY(-4px);border-color:#31405a;box-shadow:0 22px 50px -28px rgba(0,0,0,0.9);}
   .card:hover::before{opacity:1;}
   .card:hover .card-title{color:var(--cyan);}
   .card:hover .card-arrow{transform:translate(3px,-3px);color:var(--cyan);}
-  .card-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px;}
-  .card-index{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--dim);letter-spacing:0.06em;}
-  .card-arrow{font-family:'JetBrains Mono',monospace;font-size:16px;color:var(--dim);transition:transform .18s, color .18s;}
-  .card-title{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:21px;margin:0 0 10px;line-height:1.24;letter-spacing:-0.01em;transition:color .16s;}
-  .card-desc{font-size:14px;line-height:1.6;color:var(--muted);margin:0 0 20px;flex-grow:1;}
-  .card-tags{display:flex;flex-wrap:wrap;gap:6px;border-top:1px solid var(--line-soft);padding-top:16px;}
-  .tag{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.03em;text-transform:uppercase;color:var(--muted);background:rgba(255,255,255,0.03);border:1px solid var(--line-soft);padding:4px 9px;border-radius:5px;}
+  .card-thumb{position:relative;aspect-ratio:16/9;overflow:hidden;background:var(--panel-2);border-bottom:1px solid var(--line);flex-shrink:0;}
+  .card-thumb img{width:100%;height:100%;object-fit:cover;object-position:top;display:block;transition:transform .35s;}
+  .card:hover .card-thumb img{transform:scale(1.045);}
+  .card-body{padding:16px 18px 15px;display:flex;flex-direction:column;flex:1;}
+  .card-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:11px;}
+  .card-index{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--dim);letter-spacing:0.06em;}
+  .card-arrow{font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--dim);transition:transform .18s, color .18s;}
+  .card-title{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:16px;margin:0 0 7px;line-height:1.24;letter-spacing:-0.01em;transition:color .16s;}
+  .card-desc{font-size:12.5px;line-height:1.5;color:var(--muted);margin:0 0 13px;flex-grow:1;}
+  .card-tags{display:flex;flex-wrap:wrap;gap:5px;border-top:1px solid var(--line-soft);padding-top:12px;}
+  .tag{font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:0.03em;text-transform:uppercase;color:var(--muted);background:rgba(255,255,255,0.03);border:1px solid var(--line-soft);padding:3px 7px;border-radius:5px;}
 
   /* ---------- power bi gallery ---------- */
   .pbi-group{margin-bottom:48px;}
@@ -266,6 +270,10 @@
   @media (prefers-reduced-motion:reduce){
     *{animation:none !important;transition:none !important;scroll-behavior:auto !important;}
     .reveal{opacity:1;transform:none;}
+  }
+
+  @media (max-width:1180px) and (min-width:861px){
+    .work-grid{grid-template-columns:repeat(2,1fr);}
   }
 
   @media (max-width:860px){
@@ -389,74 +397,98 @@
         <div class="section-tag">Selected work / 9 reports</div>
         <h2 class="section-title">Reports &amp; dashboards</h2>
       </div>
-      <div class="section-note">
-        Names are anonymized templates — structure, charts &amp; analysis are unchanged.
-      </div>
     </div>
 
     <div class="work-grid">
 
       <a class="card reveal" href="nimbus-monetization-hub.html" target="_blank" rel="noopener">
-        <div class="card-top"><span class="card-index">REPORT_01</span><span class="card-arrow">↗</span></div>
-        <h3 class="card-title">Nimbus — Monetization Hub</h3>
-        <p class="card-desc">A full monetization command center: DAU/MAU, whales, retention, FTP, and revenue in one interactive D3 dashboard.</p>
-        <div class="card-tags"><span class="tag">Dashboard</span><span class="tag">Monetization</span></div>
+        <div class="card-thumb"><img src="assets/thumbs/nimbus-monetization-hub.jpg" alt="Nimbus — Monetization Hub thumbnail" loading="lazy" onerror="cardThumbFallback(this)"></div>
+        <div class="card-body">
+          <div class="card-top"><span class="card-index">REPORT_01</span><span class="card-arrow">↗</span></div>
+          <h3 class="card-title">Nimbus — Monetization Hub</h3>
+          <p class="card-desc">A full monetization command center: DAU/MAU, whales, retention, FTP, and revenue in one interactive D3 dashboard.</p>
+          <div class="card-tags"><span class="tag">Dashboard</span><span class="tag">Monetization</span></div>
+        </div>
       </a>
 
       <a class="card reveal" href="nimbus-ab-test-report.html" target="_blank" rel="noopener">
-        <div class="card-top"><span class="card-index">REPORT_02</span><span class="card-arrow">↗</span></div>
-        <h3 class="card-title">Nimbus — A/B Test Report</h3>
-        <p class="card-desc">Full single-test readout: variant performance, statistical confidence, and a clear ship / no-ship recommendation.</p>
-        <div class="card-tags"><span class="tag">A/B Testing</span><span class="tag">Stats</span></div>
+        <div class="card-thumb"><img src="assets/thumbs/nimbus-ab-test-report.jpg" alt="Nimbus — A/B Test Report thumbnail" loading="lazy" onerror="cardThumbFallback(this)"></div>
+        <div class="card-body">
+          <div class="card-top"><span class="card-index">REPORT_02</span><span class="card-arrow">↗</span></div>
+          <h3 class="card-title">Nimbus — A/B Test Report</h3>
+          <p class="card-desc">Full single-test readout: variant performance, statistical confidence, and a clear ship / no-ship recommendation.</p>
+          <div class="card-tags"><span class="tag">A/B Testing</span><span class="tag">Stats</span></div>
+        </div>
       </a>
 
       <a class="card reveal" href="nimbus-datalens-dashboard.html" target="_blank" rel="noopener">
-        <div class="card-top"><span class="card-index">REPORT_03</span><span class="card-arrow">↗</span></div>
-        <h3 class="card-title">Nimbus — Datalens Dashboard</h3>
-        <p class="card-desc">Interactive DAU/MAU, retention, and revenue dashboard used for daily monitoring of live health.</p>
-        <div class="card-tags"><span class="tag">Dashboard</span><span class="tag">KPI Tracking</span></div>
+        <div class="card-thumb"><img src="assets/thumbs/nimbus-datalens-dashboard.jpg" alt="Nimbus — Datalens Dashboard thumbnail" loading="lazy" onerror="cardThumbFallback(this)"></div>
+        <div class="card-body">
+          <div class="card-top"><span class="card-index">REPORT_03</span><span class="card-arrow">↗</span></div>
+          <h3 class="card-title">Nimbus — Datalens Dashboard</h3>
+          <p class="card-desc">Interactive DAU/MAU, retention, and revenue dashboard used for daily monitoring of live health.</p>
+          <div class="card-tags"><span class="tag">Dashboard</span><span class="tag">KPI Tracking</span></div>
+        </div>
       </a>
 
       <a class="card reveal" href="vertex-ab-test-reports.html" target="_blank" rel="noopener">
-        <div class="card-top"><span class="card-index">REPORT_04</span><span class="card-arrow">↗</span></div>
-        <h3 class="card-title">Vertex — A/B Test Reports</h3>
-        <p class="card-desc">Filtered, date-scoped experiment reporting layer built to compare test cohorts side by side.</p>
-        <div class="card-tags"><span class="tag">A/B Testing</span><span class="tag">Filtering</span></div>
+        <div class="card-thumb"><img src="assets/thumbs/vertex-ab-test-reports.jpg" alt="Vertex — A/B Test Reports thumbnail" loading="lazy" onerror="cardThumbFallback(this)"></div>
+        <div class="card-body">
+          <div class="card-top"><span class="card-index">REPORT_04</span><span class="card-arrow">↗</span></div>
+          <h3 class="card-title">Vertex — A/B Test Reports</h3>
+          <p class="card-desc">Filtered, date-scoped experiment reporting layer built to compare test cohorts side by side.</p>
+          <div class="card-tags"><span class="tag">A/B Testing</span><span class="tag">Filtering</span></div>
+        </div>
       </a>
 
       <a class="card reveal" href="vertex-shop-level-analysis.html" target="_blank" rel="noopener">
-        <div class="card-top"><span class="card-index">REPORT_05</span><span class="card-arrow">↗</span></div>
-        <h3 class="card-title">Vertex — Shop-Level Analysis</h3>
-        <p class="card-desc">Item-by-item breakdown of shop performance to find which SKUs drive revenue and which are dead weight.</p>
-        <div class="card-tags"><span class="tag">Revenue</span><span class="tag">Product Analytics</span></div>
+        <div class="card-thumb"><img src="assets/thumbs/vertex-shop-level-analysis.jpg" alt="Vertex — Shop-Level Analysis thumbnail" loading="lazy" onerror="cardThumbFallback(this)"></div>
+        <div class="card-body">
+          <div class="card-top"><span class="card-index">REPORT_05</span><span class="card-arrow">↗</span></div>
+          <h3 class="card-title">Vertex — Shop-Level Analysis</h3>
+          <p class="card-desc">Item-by-item breakdown of shop performance to find which SKUs drive revenue and which are dead weight.</p>
+          <div class="card-tags"><span class="tag">Revenue</span><span class="tag">Product Analytics</span></div>
+        </div>
       </a>
 
       <a class="card reveal" href="vertex-iap-revenue-share.html" target="_blank" rel="noopener">
-        <div class="card-top"><span class="card-index">REPORT_06</span><span class="card-arrow">↗</span></div>
-        <h3 class="card-title">Vertex — IAP Revenue Share</h3>
-        <p class="card-desc">Breaks down in-app purchase revenue by segment and platform to explain where the money actually comes from.</p>
-        <div class="card-tags"><span class="tag">Monetization</span><span class="tag">Revenue</span></div>
+        <div class="card-thumb"><img src="assets/thumbs/vertex-iap-revenue-share.jpg" alt="Vertex — IAP Revenue Share thumbnail" loading="lazy" onerror="cardThumbFallback(this)"></div>
+        <div class="card-body">
+          <div class="card-top"><span class="card-index">REPORT_06</span><span class="card-arrow">↗</span></div>
+          <h3 class="card-title">Vertex — IAP Revenue Share</h3>
+          <p class="card-desc">Breaks down in-app purchase revenue by segment and platform to explain where the money actually comes from.</p>
+          <div class="card-tags"><span class="tag">Monetization</span><span class="tag">Revenue</span></div>
+        </div>
       </a>
 
       <a class="card reveal" href="vertex-conversion-investigation.html" target="_blank" rel="noopener">
-        <div class="card-top"><span class="card-index">REPORT_07</span><span class="card-arrow">↗</span></div>
-        <h3 class="card-title">Vertex — Conversion Investigation</h3>
-        <p class="card-desc">Root-cause investigation into a conversion drop, walking from symptom to diagnosis to recommended fix.</p>
-        <div class="card-tags"><span class="tag">Investigation</span><span class="tag">Funnel</span></div>
+        <div class="card-thumb"><img src="assets/thumbs/vertex-conversion-investigation.jpg" alt="Vertex — Conversion Investigation thumbnail" loading="lazy" onerror="cardThumbFallback(this)"></div>
+        <div class="card-body">
+          <div class="card-top"><span class="card-index">REPORT_07</span><span class="card-arrow">↗</span></div>
+          <h3 class="card-title">Vertex — Conversion Investigation</h3>
+          <p class="card-desc">Root-cause investigation into a conversion drop, walking from symptom to diagnosis to recommended fix.</p>
+          <div class="card-tags"><span class="tag">Investigation</span><span class="tag">Funnel</span></div>
+        </div>
       </a>
 
       <a class="card reveal" href="iap-decline-audit-charts.html" target="_blank" rel="noopener">
-        <div class="card-top"><span class="card-index">REPORT_08</span><span class="card-arrow">↗</span></div>
-        <h3 class="card-title">IAP Decline Audit — Charts</h3>
-        <p class="card-desc">Every number behind an IAP revenue decline laid out as charts, built for a fast leadership skim.</p>
-        <div class="card-tags"><span class="tag">Audit</span><span class="tag">Charts</span></div>
+        <div class="card-thumb"><img src="assets/thumbs/iap-decline-audit-charts.jpg" alt="IAP Decline Audit — Charts thumbnail" loading="lazy" onerror="cardThumbFallback(this)"></div>
+        <div class="card-body">
+          <div class="card-top"><span class="card-index">REPORT_08</span><span class="card-arrow">↗</span></div>
+          <h3 class="card-title">IAP Decline Audit — Charts</h3>
+          <p class="card-desc">Every number behind an IAP revenue decline laid out as charts, built for a fast leadership skim.</p>
+          <div class="card-tags"><span class="tag">Audit</span><span class="tag">Charts</span></div>
+        </div>
       </a>
 
       <a class="card reveal" href="blitz-sale-analysis.html" target="_blank" rel="noopener">
-        <div class="card-top"><span class="card-index">REPORT_09</span><span class="card-arrow">↗</span></div>
-        <h3 class="card-title">Blitz Sale — Cannibalization Check</h3>
-        <p class="card-desc">Focused study on one limited-time event, asking a single sharp question: is it cannibalizing core IAP revenue?</p>
-        <div class="card-tags"><span class="tag">Event Analysis</span><span class="tag">Revenue</span></div>
+        <div class="card-thumb"><img src="assets/thumbs/blitz-sale-analysis.jpg" alt="Blitz Sale — Cannibalization Check thumbnail" loading="lazy" onerror="cardThumbFallback(this)"></div>
+        <div class="card-body">
+          <div class="card-top"><span class="card-index">REPORT_09</span><span class="card-arrow">↗</span></div>
+          <h3 class="card-title">Blitz Sale — Cannibalization Check</h3>
+          <p class="card-desc">Focused study on one limited-time event, asking a single sharp question: is it cannibalizing core IAP revenue?</p>
+          <div class="card-tags"><span class="tag">Event Analysis</span><span class="tag">Revenue</span></div>
+        </div>
       </a>
 
     </div>
@@ -614,6 +646,18 @@
 <script>
 (function(){
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- fallback UI for a report card thumbnail that hasn't been added yet ---------- */
+  window.cardThumbFallback = function(img){
+    var wrap = img.parentElement;
+    var heights = [38,64,50,78,58,88,66,46];
+    var bars = heights.map(function(h){ return '<i style="height:'+h+'%"></i>'; }).join('');
+    wrap.innerHTML = '<div class="pbi-fallback">' +
+      '<div class="fb-top"><span>REPORT</span></div>' +
+      '<div class="fb-bars">' + bars + '</div>' +
+      '<div class="fb-label"><b>Preview pending</b>thumbnail not yet added</div>' +
+      '</div>';
+  };
 
   /* ---------- animated KPI counters ---------- */
   function animateCount(el){
