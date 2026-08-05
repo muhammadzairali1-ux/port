@@ -460,6 +460,24 @@
       </a>
 
     </div>
+
+    <div class="pbi-group reveal" style="margin-top:34px">
+      <div class="pbi-group-head"><span class="pbi-num">CUSTOM BUILD</span><span class="pbi-name">UA &amp; Revenue Dashboard — custom HTML/D3</span></div>
+      <div class="pbi-grid" id="extra-shots">
+        <button class="pbi-thumb" type="button">
+          <img src="assets/screenshots/playspare-daily-overview.png" alt="Daily overview: revenue, spend, profit and blended ROI KPIs with a daily trend chart" loading="lazy">
+          <span class="pbi-cap">Daily overview</span>
+        </button>
+        <button class="pbi-thumb" type="button">
+          <img src="assets/screenshots/playspare-monthly-projection.png" alt="Month projection panel and monthly achievement table" loading="lazy">
+          <span class="pbi-cap">Monthly projection &amp; achievement</span>
+        </button>
+        <button class="pbi-thumb" type="button">
+          <img src="assets/screenshots/playspare-target-vs-actual.png" alt="Quarterly target gauge and target vs actual profit/ROI chart" loading="lazy">
+          <span class="pbi-cap">Target vs actual</span>
+        </button>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -765,6 +783,18 @@
     wrap.appendChild(grid);
     container.appendChild(wrap);
     io.observe(wrap);
+  });
+
+  /* ---------- extra inline screenshots (Playspare — custom HTML dashboard) ---------- */
+  var extraShots = [
+    { src: 'assets/screenshots/playspare-daily-overview.png', cap: 'UA & Revenue Dashboard — Daily overview' },
+    { src: 'assets/screenshots/playspare-monthly-projection.png', cap: 'UA & Revenue Dashboard — Monthly projection & achievement' },
+    { src: 'assets/screenshots/playspare-target-vs-actual.png', cap: 'UA & Revenue Dashboard — Target vs actual' }
+  ];
+  document.querySelectorAll('#extra-shots .pbi-thumb').forEach(function(btn, i){
+    var idx = flat.length;
+    flat.push(extraShots[i]);
+    btn.addEventListener('click', function(){ openLightbox(idx); });
   });
 
   /* ---------- lightbox ---------- */
